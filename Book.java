@@ -91,6 +91,6 @@ public class Book {
 
     // do a toString method
     public String toString() {
-        return "  Title: " + title + " \n Author: " + author + "   \n   ISBN: " + ISBN + " \n   Valid ISBN: " + validateISBN();
+        return "Title: " + title + "\nAuthor: " + author + "\nISBN: " + ISBN + "\nValid ISBN: " + validateISBN();
     }
 }
