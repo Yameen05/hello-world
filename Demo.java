@@ -1,39 +1,45 @@
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.util.ArrayList;
 import java.util.Scanner;
+import java.io.File;
 
 public class Demo {
     public static void main(String[] args) {
-        ArrayList<Policy> policies = new ArrayList<>();
-        try {
-            Scanner fileScanner = new Scanner(new File("PolicyInformation.txt"));
-            while (fileScanner.hasNext()) {
-                int policyNumber = fileScanner.nextInt();
-                String providerName = fileScanner.next();
-                String firstName = fileScanner.next();
-                String lastName = fileScanner.next();
-                int age = fileScanner.nextInt();
-                String smokingStatus = fileScanner.next();
-                double height = fileScanner.nextDouble();
-                double weight = fileScanner.nextDouble();
-                policies.add(new Policy(policyNumber, providerName, firstName, lastName, age, smokingStatus, height, weight));
-            }
-            fileScanner.close();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
+        Policy[] policies = new Policy[100];
+        int policyCount = 0;
+
+        Scanner fileScanner = new Scanner("");
+        Scanner lineScanner = new Scanner("");
+
+        // Open the file
+        fileScanner = new Scanner(getFile("PolicyInformation.txt"));
+
+        // Read each line and create Policy objects
+        while (fileScanner.hasNextLine()) {
+            lineScanner = new Scanner(fileScanner.nextLine());
+            lineScanner.useDelimiter(" ");
+
+            int policyNum = lineScanner.nextInt();
+            String provider = lineScanner.next();
+            String first = lineScanner.next();
+            String last = lineScanner.next();
+            int personAge = lineScanner.nextInt();
+            String smoking = lineScanner.next();
+            double personHeight = lineScanner.nextDouble();
+            double personWeight = lineScanner.nextDouble();
+
+            policies[policyCount] = new Policy(policyNum, provider, first, last, personAge, smoking, personHeight, personWeight);
+            policyCount++;
         }
 
         // Display policy information
-        for (Policy policy : policies) {
-            System.out.println(policy);
+        for (int i = 0; i < policyCount; i++) {
+            System.out.println(policies[i]);
         }
 
         // Count smokers and non-smokers
         int smokerCount = 0;
         int nonSmokerCount = 0;
-        for (Policy policy : policies) {
-            if (policy.getSmokingStatus().equals("smoker")) {
+        for (int i = 0; i < policyCount; i++) {
+            if (policies[i].smokingStatus.equals("smoker")) {
                 smokerCount++;
             } else {
                 nonSmokerCount++;
@@ -41,5 +47,9 @@ public class Demo {
         }
         System.out.println("The number of policies with a smoker is: " + smokerCount);
         System.out.println("The number of policies with a non-smoker is: " + nonSmokerCount);
+    }
+
+    public static File getFile(String fileName) {
+        return new File(fileName);
     }
 }

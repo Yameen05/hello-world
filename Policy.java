@@ -8,17 +8,18 @@ public class Policy {
     private double height;
     private double weight;
 
-    public Policy(int policyNumber, String providerName, String firstName, String lastName, int age, String smokingStatus, double height, double weight) {
-        this.policyNumber = policyNumber;
-        this.providerName = providerName;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.age = age;
-        this.smokingStatus = smokingStatus;
-        this.height = height;
-        this.weight = weight;
+    public Policy(int policyNum, String provider, String first, String last, int personAge, String smoking, double personHeight, double personWeight) {
+        policyNumber = policyNum;
+        providerName = provider;
+        firstName = first;
+        lastName = last;
+        age = personAge;
+        smokingStatus = smoking;
+        height = personHeight;
+        weight = personWeight;
     }
 
+    // Getter methods
     public int getPolicyNumber() {
         return policyNumber;
     }
@@ -51,16 +52,17 @@ public class Policy {
         return weight;
     }
 
+    // Method to calculate BMI
     public double calculateBMI() {
         return (weight / (height * height)) * 703;
     }
 
+    // Method to calculate Policy Price (Placeholder logic)
     public double calculatePolicyPrice() {
-        // Calculate policy price logic
-        return 700.00; // Placeholder value
+        return 700.00;
     }
 
-    @Override
+    // toString method for display
     public String toString() {
         return "Policy Number: " + policyNumber + "\n" +
                "Provider Name: " + providerName + "\n" +
